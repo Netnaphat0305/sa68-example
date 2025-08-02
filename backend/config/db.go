@@ -1,15 +1,15 @@
 package config
 
 import (
-   "fmt"
+   "fmt" //สำหรับแสดงข้อความ เช่น fmt.Println
    "time"
    "example.com/sa68-example/entity"
-   "gorm.io/driver/sqlite"
+   "gorm.io/driver/sqlite" //GORM ORM + SQLite driver
    "gorm.io/gorm"
 )
 
-var db *gorm.DB
-
+var db *gorm.DB //สร้างตัวแปร db เพื่อเก็บ object ของ database 
+//ฟังก์ชัน getter เพื่อให้ module อื่นเรียกใช้งาน database connection ได้ผ่าน config.DB()
 func DB() *gorm.DB {
    return db
 }
@@ -18,13 +18,15 @@ func ConnectionDB() {
 	database, err := gorm.Open(sqlite.Open("sa.db?cache=shared"), &gorm.Config{})
 	if err != nil {
 		panic("failed to connect database")
+		//ถ้าเชื่อมไม่สำเร็จ จะหยุดทำงานด้วย panic(...)
 	}
 	fmt.Println("Connected to database")
+	//ถ้าเชื่อมได้จะพิมพ์ว่า "Connected to database" และกำหนดให้ตัวแปร db ชี้ไปยัง database ที่เชื่อมอยู่
 	db = database
 }
 
 func SetupDatabase() {
-	// Migrate Entities
+	// Migrate Entities สร้างตารางตามโครงสร้าง struct ที่กำหนดไว้ใน entity
 	db.AutoMigrate(
 		&entity.User{},
 		&entity.Student{},
@@ -35,19 +37,31 @@ func SetupDatabase() {
 		&entity.JobApplication{},
 		&entity.EmploymentType{},
 		&entity.Employer{},
+		&entity.SalaryType{},
 	)
 
-	// Seed EmploymentType
+	// Seed EmploymentType สร้าง slice ของชนิดงาน เช่น งานประจำ (FullTime), พาร์ทไทม์ เหมือนเพิ่ทข้อมูล
 	employmentTypes := []entity.EmploymentType{
 		{EmploymentTypeName: "FullTime"},
 		{EmploymentTypeName: "PartTime"},
 		{EmploymentTypeName: "Freelance"},
 		{EmploymentTypeName: "Contract"},
 	}
+	//FirstOrCreate จะเช็คก่อนว่ามีหรือยัง ถ้ายังไม่มีจะสร้างใหม่
 	for _, et := range employmentTypes {
 		db.FirstOrCreate(&et, entity.EmploymentType{EmploymentTypeName: et.EmploymentTypeName})
 	}
 
+	// Seed SalaryType
+	salaryTypes := []entity.SalaryType{
+		{SalaryTypeName: entity.Monthly},
+		{SalaryTypeName: entity.Hourly},
+		{SalaryTypeName: entity.Daily},
+		{SalaryTypeName: entity.ProjectBased},
+	}
+	for _, st := range salaryTypes {
+	db.FirstOrCreate(&st, entity.SalaryType{SalaryTypeName: st.SalaryTypeName})
+	}
 	// Seed JobCategory
 	jobCategories := []entity.JobCategory{
 		{CategoryName: "IT"},
@@ -99,33 +113,38 @@ func SetupDatabase() {
 
 	// Seed Student
 	birthDate, _ := time.Parse("2006-01-02", "2000-05-20")
-	student := entity.Student{
-		ID:        "B6608019",
-		Email:     "student1@example.com",
-		FirstName: "Netnaphat",
-		LastName:  "Chamninok",
-		Birthday:  birthDate,
-		Gender:    "FeMale",
-		Age:       20,
-		GPA:       3.50,
-		Year:      4,
-		Faculty:   "Engineering",
-		Phone:     "0899999999",
-		UserID:    userStudent.ID,
-	}
-	db.FirstOrCreate(&student, entity.Student{ID: student.ID})
+
+student := entity.Student{
+	Email:     "student1@example.com",
+	FirstName: "Netnaphat",
+	LastName:  "Chamninok",
+	Birthday:  birthDate,
+	Gender:    "FeMale",
+	Age:       20,
+	GPA:       3.50,
+	Year:      4,
+	Faculty:   "Engineering",
+	Phone:     "0899999999",
+	UserID:    userStudent.ID,
+}
+	db.FirstOrCreate(&student, entity.Student{Email: student.Email})
 
 	// Seed JobPost
-	jobPost := entity.JobPost{
-		Title:            "Software Developer Intern",
-		Description:      "Internship position for software development.",
-		Deadline:         time.Now().AddDate(0, 1, 0),
-		Status:           "Open",
-		EmployerID:       employer.ID,
-		JobCategoryID:    jobCategories[0].ID,
-		LocationID:       locations[0].ID,
-		EmploymentTypeID: employmentTypes[0].ID,
+		jobPost := entity.JobPost{
+		Title:             "Software Developer Intern",
+		Description:       "Internship position for software development.",
+		Deadline:          time.Now().AddDate(0, 1, 0),
+		Status:            "Open",
+		ImageURL:          ptrString("https://yourdomain.com/uploads/job-image.png"),
+		PortfolioRequired: ptrString("Required.pdf"),
+		Salary:            12000,
+		EmployerID:        employer.ID,
+		JobCategoryID:     jobCategories[0].ID,
+		LocationID:        locations[0].ID,
+		EmploymentTypeID:  employmentTypes[0].ID,
+		SalaryTypeID:      salaryTypes[0].ID,
 	}
+
 	db.FirstOrCreate(&jobPost, entity.JobPost{Title: jobPost.Title})
 
 	// Seed JobApplication
@@ -145,4 +164,10 @@ func SetupDatabase() {
 		JobApplicationID: jobApplication.ID,
 	}
 	db.FirstOrCreate(&resume, entity.ResumeFile{Filename: resume.Filename})
+
+	// ptrString แปลง string ให้เป็น pointer
+
+}
+func ptrString(s string) *string {
+	return &s
 }

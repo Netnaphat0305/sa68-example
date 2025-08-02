@@ -15,7 +15,7 @@ const (
 
 type Student struct {
 	gorm.Model
-	ID 		  string     `gorm:"primaryKey;type:varchar(50)" json:"id"`
+	// ID 		  string     `gorm:"primaryKey;type:varchar(50)" json:"id"`
 	Email     string     `gorm:"type:varchar(255);not null" json:"email"`
 	FirstName string     `gorm:"type:varchar(100);not null" json:"first_name"`
 	LastName  string     `gorm:"type:varchar(100);not null" json:"last_name"`

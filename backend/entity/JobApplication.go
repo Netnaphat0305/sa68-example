@@ -21,7 +21,7 @@ type JobApplication struct {
     LastUpdate        time.Time              `gorm:"not null" json:"last_update"`
     ApplicationReason string                 `gorm:"type:varchar(255);not null" json:"application_reason"`
 
-    StudentID string `gorm:"type:varchar(100);not null" json:"student_id"`
+    StudentID uint      `gorm:"not null" json:"student_id"`
     Student   Student `gorm:"foreignKey:StudentID;references:ID"`  // FK to Student.ID
 
     JobPostID uint    `gorm:"not null" json:"job_post_id"`

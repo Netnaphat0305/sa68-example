@@ -1,0 +1,10 @@
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+button.ant-btn {
+  font-family: "Kanit", "Sarabun", Arial, sans-serif !important;
+  font-weight: 400;
+}

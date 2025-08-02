@@ -19,6 +19,9 @@ type JobPost struct {
 	Description 		string    		`gorm:"type:text;not null" json:"description"`
 	Deadline    		time.Time 		`gorm:"type:date;not null" json:"deadline"`
 	Status				StatusEnum 		`gorm:"not null" json:"status"`
+	ImageURL 			*string 		`gorm:"type:varchar(255)" json:"image_url"` // nullable string
+	PortfolioRequired 	*string 		`gorm:"type:varchar(100)" json:"portfolio_required"` // nullable
+	Salary				int				`json:"salary"`
 
 	EmployerID			uint    		`gorm:"not null" json:"employer_id"`
     Employer   			Employer 		`gorm:"foreignKey:EmployerID;references:ID"`
@@ -31,5 +34,8 @@ type JobPost struct {
 
 	EmploymentTypeID 	uint 			`gorm:"not null" json:"employment_type_id"`
 	EmploymentType   	EmploymentType 	`gorm:"foreignKey:EmploymentTypeID;references:ID"`
+
+	SalaryTypeID		uint			`gorm:"not null" json:"salary_type_id"`
+	SalaryType			SalaryType		`gorm:"foreignKey:SalaryTypeID;references:ID"`
 
 }
