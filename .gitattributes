@@ -1,2 +1,3 @@
-*.tsx linguist-language=TypeScript
-*.ts linguist-language=TypeScript
+echo 'node_modules/** linguist-vendored' >> .gitattributes
+echo 'dist/** linguist-vendored' >> .gitattributes
+echo 'build/** linguist-vendored' >> .gitattributes
