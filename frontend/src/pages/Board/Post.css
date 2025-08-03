@@ -1,0 +1,26 @@
+.bg-post {
+  background-color: #ffffff; /* พื้นหลังสีเข้ม */
+  color: #2d2d2d;
+  width: 900px;
+  height: 180px; /* สูงพอสมควร */
+  padding: 20px;
+  margin: 40px auto; /* ทำให้กล่องอยู่กึ่งกลาง (ซ้าย-ขวา) และมีช่องว่างบน-ล่าง */
+  border-radius: 15px;
+  border: 1px solid #d1d6d9;
+  box-sizing: border-box; /* รวม padding ใน width/height */
+
+  display: flex; /* เพิ่ม flex */
+  justify-content: flex-end; /* ดันรูปไปด้านขวา */
+  align-items: center; /* จัดแนวตั้งให้อยู่กลาง */
+    cursor: pointer; /* มีมือเมาส์ตอน hover */
+  transition: transform 0.2s ease;
+}
+.bg-post:hover {
+  transform: scale(1.02); /* ขยายเล็กน้อยเวลา hover */
+}
+.post-image {
+  flex-shrink: 0;
+  width: 300px; /* หรือขนาดที่เหมาะสม */
+  height: auto;
+  object-fit: contain;
+}

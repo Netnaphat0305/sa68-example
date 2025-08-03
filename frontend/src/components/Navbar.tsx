@@ -18,7 +18,7 @@ const menuItems: MenuProps["items"] = [
   },
   {
     label: (
-      <Link to="/post-job" className="menu-item-font">
+      <Link to="/Board" className="menu-item-font">
         ประกาศงาน
       </Link>
     ),

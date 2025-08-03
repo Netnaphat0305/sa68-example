@@ -1,0 +1,132 @@
+/* Board.css */
+.board-container {
+  width: 100%; /* ปลอดภัยกว่า */
+  background: linear-gradient(90deg, #1976d3 0%, #64b5f6 100%);
+  margin-top: 65px;
+  padding: 40px 0;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+}
+
+
+.board-content {
+  width: 100%;
+  max-width: 1024px; /* หรือความกว้างที่ต้องการให้ข้างใน */
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 10px;
+  padding: 0 20px; /* padding ซ้ายขวา ให้เนื้อหาข้างในไม่ชนขอบ */
+  box-sizing: border-box;
+}
+
+
+.banner-container {
+  width: 100%; /* ให้เต็มพื้นที่ parent */
+  /* หรือกำหนด max-width เท่าที่ต้องการ */
+  max-height: 180px;
+  box-sizing: border-box;
+  padding: 0 20px; /* เพิ่ม padding ด้านซ้าย-ขวาให้พื้นที่ไม่ชิดขอบ */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #f9edc8;
+  border-radius: 30px;
+  flex-grow: 1; /* ให้ banner-container ขยายเต็มที่ที่เหลือ */
+  max-width: 700px;
+  margin-left: auto;
+  margin-right: 0;
+  border: 1px solid #6B7280;
+}
+
+.banner-image {
+  width: 250px;
+  height: auto;
+  flex-shrink: 0;
+  transform: scale(1.2);
+  transform-origin: right center;
+  margin-right: -40px;
+  margin-top: -5px;
+  max-width: 100%; /* ✅ ป้องกันล้นจอ */
+}
+
+.banner-content h1 {
+  font-family: "Kanit", "Sarabun", sans-serif;
+  font-weight: 500;
+  color: #1f2937;
+  margin-top: 10px; /* ระยะห่างจากบน container */
+  margin-bottom: 0; /* ไม่มีช่องว่างด้านล่าง */
+  padding: 0;
+  padding-left: 10px;
+  font-size: 24px;
+  font-weight: 500;
+}
+
+.banner-content p {
+  font-family: "Kanit", "Sarabun", sans-serif;
+  color: #1f2937;
+  font-weight: 400;
+  margin-top: 0; /* ชิดติด h1 ด้านบน */
+  margin-bottom: 0; /* ไม่มีช่องว่างด้านล่าง */
+  padding: 0;
+  padding-left: 10px;
+}
+
+.no-border-button {
+  font-family: "Kanit", "Sarabun", sans-serif;
+  border: none !important;
+  box-shadow: none !important;
+  background-color: #f9edc8; /* หรือสีที่ต้องการ */
+  color: black;
+  margin-top: 0px;
+  padding-left: 10px;
+  font-weight: 500;
+}
+.subheadline h1 {
+  text-align: left;
+  color: #ffffff;
+  font-family: "Kanit", "Sarabun", sans-serif;
+  font-size: 24px;
+  margin: 0;
+  font-size: 30px;
+}
+
+.subheadline {
+  width: 100%;
+  max-width: 400px;
+  margin-left: auto;         /* ✅ ดันกล่องไปทางขวา */
+  box-sizing: border-box;
+  /* border: 1px solid black; */
+  max-height: 180px;
+}
+
+.btn-startpost {
+  background-color: #ffff;
+  color: #0088ff;
+  font-family: "Kanit", "Sarabun", sans-serif;
+  height: 33px;
+  width: 150px;
+  font-weight: 500;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3); /* ✅ ใช้ box-shadow */
+  border: none; /* ถ้าไม่ต้องการขอบ */
+  border-radius: 6px; /* เพิ่มมุมโค้งเล็กน้อยให้ดูนุ่มนวล */
+  cursor: pointer; /* เปลี่ยน cursor เมื่อ hover */
+  transition: 0.2s ease;
+}
+
+.btn-mypost {
+  background-color: #ffff;
+  color: #0088ff;
+  font-family: "Kanit", "Sarabun", sans-serif;
+  margin-left: 20px;
+  margin-top: 20px;
+  height: 33px;
+  width: 150px;
+  font-weight: 500;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, .3); /* ✅ ใช้ box-shadow */
+  border: none; /* ถ้าไม่ต้องการขอบ */
+  border-radius: 6px; /* เพิ่มมุมโค้งเล็กน้อยให้ดูนุ่มนวล */
+  cursor: pointer; /* เปลี่ยน cursor เมื่อ hover */
+  transition: 0.2s ease;
+}

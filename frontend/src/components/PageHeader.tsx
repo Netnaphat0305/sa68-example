@@ -1,13 +1,19 @@
-// src/components/PageHeader.tsx
-import React from 'react';
-import styles from './PageHeader.module.css'; // ไฟล์ CSS module สำหรับตกแต่ง
+// components/PageHeader.tsx
+import React from "react";
+import "./PageHeader.css";
 
-type PageHeaderProps = {
+interface PageHeaderProps {
   title: string;
-};
+}
 
 const PageHeader: React.FC<PageHeaderProps> = ({ title }) => {
-  return <h1 className={styles.pageHeader}>{title}</h1>;
+  return (
+    <div className="pageHeader">
+      {title}
+    </div>
+  );
 };
+
+
 
 export default PageHeader;
